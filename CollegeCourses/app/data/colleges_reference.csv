@@ -1,0 +1,423 @@
+UNITID,INSTNM,INSTURL,CITY,STABBR
+190150,Harvard University,www.harvard.edu,Cambridge,MA
+130794,Yale University,www.yale.edu,New Haven,CT
+215062,University of Pennsylvania,www.upenn.edu,Philadelphia,PA
+186131,Princeton University,www.princeton.edu,Princeton,NJ
+190415,Columbia University in the City of New York,www.columbia.edu,New York,NY
+182670,Dartmouth College,www.dartmouth.edu,Hanover,NH
+217156,Brown University,www.brown.edu,Providence,RI
+190567,Cornell University,www.cornell.edu,Ithaca,NY
+166027,Massachusetts Institute of Technology,www.mit.edu,Cambridge,MA
+243744,Stanford University,www.stanford.edu,Stanford,CA
+110404,California Institute of Technology,www.caltech.edu,Pasadena,CA
+144050,University of Chicago,www.uchicago.edu,Chicago,IL
+198419,Duke University,www.duke.edu,Durham,NC
+152080,University of Notre Dame,www.nd.edu,Notre Dame,IN
+147767,Northwestern University,www.northwestern.edu,Evanston,IL
+110635,University of California-Berkeley,www.berkeley.edu,Berkeley,CA
+110662,University of California-Los Angeles,www.ucla.edu,Los Angeles,CA
+170976,University of Michigan-Ann Arbor,www.umich.edu,Ann Arbor,MI
+228778,Rice University,www.rice.edu,Houston,TX
+221999,Vanderbilt University,www.vanderbilt.edu,Nashville,TN
+145637,University of Illinois Urbana-Champaign,www.illinois.edu,Champaign,IL
+236948,University of Virginia-Main Campus,www.virginia.edu,Charlottesville,VA
+131469,Georgetown University,www.georgetown.edu,Washington,DC
+164988,Johns Hopkins University,www.jhu.edu,Baltimore,MD
+199120,University of North Carolina at Chapel Hill,www.unc.edu,Chapel Hill,NC
+240444,University of Wisconsin-Madison,www.wisc.edu,Madison,WI
+204796,Ohio State University-Main Campus,www.osu.edu,Columbus,OH
+214777,Carnegie Mellon University,www.cmu.edu,Pittsburgh,PA
+171100,Michigan State University,www.msu.edu,East Lansing,MI
+153658,University of Iowa,www.uiowa.edu,Iowa City,IA
+163286,University of Maryland-College Park,www.umd.edu,College Park,MD
+186380,Rutgers University-New Brunswick,www.rutgers.edu,New Brunswick,NJ
+110680,University of California-San Diego,www.ucsd.edu,La Jolla,CA
+110644,University of California-Davis,www.ucdavis.edu,Davis,CA
+110653,University of California-Irvine,www.uci.edu,Irvine,CA
+110671,University of California-Santa Barbara,www.ucsb.edu,Santa Barbara,CA
+110714,University of California-Santa Cruz,www.ucsc.edu,Santa Cruz,CA
+110617,University of California-Riverside,www.ucr.edu,Riverside,CA
+445188,University of California-Merced,www.ucmerced.edu,Merced,CA
+228723,Texas A&M University-College Station,www.tamu.edu,College Station,TX
+227757,University of Texas at Austin,www.utexas.edu,Austin,TX
+134130,University of Florida,www.ufl.edu,Gainesville,FL
+228459,Southern Methodist University,www.smu.edu,Dallas,TX
+228787,Baylor University,www.baylor.edu,Waco,TX
+229115,Texas Christian University,www.tcu.edu,Fort Worth,TX
+229027,Texas Tech University,www.ttu.edu,Lubbock,TX
+228529,Sam Houston State University,www.shsu.edu,Huntsville,TX
+126614,University of Colorado Boulder,www.colorado.edu,Boulder,CO
+174066,University of Minnesota-Twin Cities,www.umn.edu,Minneapolis,MN
+243780,University of Southern California,www.usc.edu,Los Angeles,CA
+104151,Arizona State University-Tempe,www.asu.edu,Tempe,AZ
+104179,University of Arizona,www.arizona.edu,Tucson,AZ
+230764,University of Utah,www.utah.edu,Salt Lake City,UT
+230737,Brigham Young University-Provo,www.byu.edu,Provo,UT
+206084,University of Oklahoma-Norman Campus,www.ou.edu,Norman,OK
+155317,University of Kansas,www.ku.edu,Lawrence,KS
+178396,University of Missouri-Columbia,www.missouri.edu,Columbia,MO
+181464,University of Nebraska-Lincoln,www.unl.edu,Lincoln,NE
+153603,Iowa State University,www.iastate.edu,Ames,IA
+126818,Colorado State University-Fort Collins,www.colostate.edu,Fort Collins,CO
+209551,University of Oregon,www.uoregon.edu,Eugene,OR
+209542,Oregon State University,www.oregonstate.edu,Corvallis,OR
+236939,Virginia Polytechnic Institute and State University,www.vt.edu,Blacksburg,VA
+232186,College of William and Mary,www.wm.edu,Williamsburg,VA
+139959,Georgia Institute of Technology-Main Campus,www.gatech.edu,Atlanta,GA
+228769,University of Houston,www.uh.edu,Houston,TX
+100751,The University of Alabama,www.ua.edu,Tuscaloosa,AL
+100858,Auburn University,www.auburn.edu,Auburn,AL
+132903,Florida State University,www.fsu.edu,Tallahassee,FL
+137351,University of Georgia,www.uga.edu,Athens,GA
+157085,University of Kentucky,www.uky.edu,Lexington,KY
+159391,Louisiana State University and Agricultural & Mechanical College,www.lsu.edu,Baton Rouge,LA
+179159,University of Mississippi,www.olemiss.edu,University,MS
+178411,Mississippi State University,www.msstate.edu,Mississippi State,MS
+218663,University of South Carolina-Columbia,www.sc.edu,Columbia,SC
+219471,University of Tennessee-Knoxville,www.utk.edu,Knoxville,TN
+104717,University of Arkansas,www.uark.edu,Fayetteville,AR
+190044,New York University,www.nyu.edu,New York,NY
+131496,George Washington University,www.gwu.edu,Washington,DC
+131520,American University,www.american.edu,Washington,DC
+131283,Catholic University of America,www.cua.edu,Washington,DC
+131399,Howard University,www.howard.edu,Washington,DC
+131159,Gallaudet University,www.gallaudet.edu,Washington,DC
+166683,Boston University,www.bu.edu,Boston,MA
+167358,Northeastern University,www.northeastern.edu,Boston,MA
+164924,Emory University,www.emory.edu,Atlanta,GA
+168148,Tufts University,www.tufts.edu,Medford,MA
+167987,Boston College,www.bc.edu,Chestnut Hill,MA
+211440,University of Pittsburgh-Pittsburgh Campus,www.pitt.edu,Pittsburgh,PA
+215293,Drexel University,www.drexel.edu,Philadelphia,PA
+216339,Lehigh University,www.lehigh.edu,Bethlehem,PA
+213543,Bucknell University,www.bucknell.edu,Lewisburg,PA
+233921,University of Washington-Seattle Campus,www.washington.edu,Seattle,WA
+236595,Wake Forest University,www.wfu.edu,Winston-Salem,NC
+198136,Davidson College,www.davidson.edu,Davidson,NC
+152318,Purdue University-Main Campus,www.purdue.edu,West Lafayette,IN
+151351,Indiana University-Bloomington,www.indiana.edu,Bloomington,IN
+204857,Case Western Reserve University,www.case.edu,Cleveland,OH
+201885,University of Cincinnati-Main Campus,www.uc.edu,Cincinnati,OH
+210669,University of Dayton,www.udayton.edu,Dayton,OH
+201645,Oberlin College,www.oberlin.edu,Oberlin,OH
+204635,Kenyon College,www.kenyon.edu,Gambier,OH
+204024,Denison University,www.denison.edu,Granville,OH
+200280,College of Wooster,www.wooster.edu,Wooster,OH
+221759,University of Tulsa,www.utulsa.edu,Tulsa,OK
+133669,University of Miami,www.miami.edu,Coral Gables,FL
+132471,Eckerd College,www.eckerd.edu,Saint Petersburg,FL
+137546,Mercer University,www.mercer.edu,Macon,GA
+139755,Emory University-Oxford College,www.oxford.emory.edu,Oxford,GA
+191515,Rensselaer Polytechnic Institute,www.rpi.edu,Troy,NY
+168218,Worcester Polytechnic Institute,www.wpi.edu,Worcester,MA
+196088,Rochester Institute of Technology,www.rit.edu,Rochester,NY
+115409,Harvey Mudd College,www.hmc.edu,Claremont,CA
+196413,University of Rochester,www.rochester.edu,Rochester,NY
+194578,Clarkson University,www.clarkson.edu,Potsdam,NY
+194824,Cooper Union for the Advancement of Science and Art,www.cooper.edu,New York,NY
+197869,Stevens Institute of Technology,www.stevens.edu,Hoboken,NJ
+195003,New York Institute of Technology,www.nyit.edu,Old Westbury,NY
+130943,United States Military Academy,www.westpoint.edu,West Point,NY
+164155,United States Naval Academy,www.usna.edu,Annapolis,MD
+126775,United States Air Force Academy,www.usafa.edu,USAF Academy,CO
+130314,United States Coast Guard Academy,www.uscga.edu,New London,CT
+229063,United States Merchant Marine Academy,www.usmma.edu,Kings Point,NY
+164076,St John's College,www.sjc.edu,Annapolis,MD
+167835,Williams College,www.williams.edu,Williamstown,MA
+164465,Amherst College,www.amherst.edu,Amherst,MA
+168342,Wellesley College,www.wellesley.edu,Wellesley,MA
+167729,Smith College,www.smith.edu,Northampton,MA
+166124,Mount Holyoke College,www.mtholyoke.edu,South Hadley,MA
+212911,Swarthmore College,www.swarthmore.edu,Swarthmore,PA
+212106,Haverford College,www.haverford.edu,Haverford,PA
+212054,Bryn Mawr College,www.brynmawr.edu,Bryn Mawr,PA
+161004,Bowdoin College,www.bowdoin.edu,Brunswick,ME
+161086,Bates College,www.bates.edu,Lewiston,ME
+161253,Colby College,www.colby.edu,Waterville,ME
+130697,Connecticut College,www.conncoll.edu,New London,CT
+130590,Trinity College,www.trincoll.edu,Hartford,CT
+130493,Wesleyan University,www.wesleyan.edu,Middletown,CT
+190099,Barnard College,www.barnard.edu,New York,NY
+221768,Sewanee-The University of the South,www.sewanee.edu,Sewanee,TN
+218070,Furman University,www.furman.edu,Greenville,SC
+194091,Colgate University,www.colgate.edu,Hamilton,NY
+190512,Hamilton College,www.hamilton.edu,Clinton,NY
+191241,Vassar College,www.vassar.edu,Poughkeepsie,NY
+130226,Yale University,www.yale.edu,New Haven,CT
+191676,Skidmore College,www.skidmore.edu,Saratoga Springs,NY
+197036,Sarah Lawrence College,www.sarahlawrence.edu,Bronxville,NY
+190664,Hobart William Smith Colleges,www.hws.edu,Geneva,NY
+191968,Union College,www.union.edu,Schenectady,NY
+233374,Whitman College,www.whitman.edu,Walla Walla,WA
+115116,Pomona College,www.pomona.edu,Claremont,CA
+113698,Occidental College,www.oxy.edu,Los Angeles,CA
+121345,University of Redlands,www.redlands.edu,Redlands,CA
+115355,Claremont McKenna College,www.cmc.edu,Claremont,CA
+115358,Scripps College,www.scrippscollege.edu,Claremont,CA
+115361,Pitzer College,www.pitzer.edu,Claremont,CA
+120883,Loyola Marymount University,www.lmu.edu,Los Angeles,CA
+121150,Pepperdine University,www.pepperdine.edu,Malibu,CA
+110529,University of San Francisco,www.usfca.edu,San Francisco,CA
+122436,Santa Clara University,www.scu.edu,Santa Clara,CA
+110556,University of the Pacific,www.pacific.edu,Stockton,CA
+119605,Mills College,www.mills.edu,Oakland,CA
+117946,University of San Diego,www.sandiego.edu,San Diego,CA
+110583,Chapman University,www.chapman.edu,Orange,CA
+148627,Lake Forest College,www.lakeforest.edu,Lake Forest,IL
+144740,DePaul University,www.depaul.edu,Chicago,IL
+145725,Knox College,www.knox.edu,Galesburg,IL
+147244,Loyola University Chicago,www.luc.edu,Chicago,IL
+147660,Illinois Institute of Technology,www.iit.edu,Chicago,IL
+149222,University of Illinois Chicago,www.uic.edu,Chicago,IL
+147536,Illinois Wesleyan University,www.iwu.edu,Bloomington,IL
+144218,Grinnell College,www.grinnell.edu,Grinnell,IA
+153384,Cornell College,www.cornellcollege.edu,Mount Vernon,IA
+155089,Macalester College,www.macalester.edu,Saint Paul,MN
+174914,Carleton College,www.carleton.edu,Northfield,MN
+174844,St Olaf College,www.stolaf.edu,Northfield,MN
+173258,College of Saint Benedict,www.csbsju.edu,Saint Joseph,MN
+240727,Beloit College,www.beloit.edu,Beloit,WI
+240365,Lawrence University,www.lawrence.edu,Appleton,WI
+240693,Ripon College,www.ripon.edu,Ripon,WI
+139658,Morehouse College,www.morehouse.edu,Atlanta,GA
+139861,Spelman College,www.spelman.edu,Atlanta,GA
+199102,North Carolina A&T State University,www.ncat.edu,Greensboro,NC
+175856,Tuskegee University,www.tuskegee.edu,Tuskegee,AL
+131399,Howard University,www.howard.edu,Washington,DC
+199148,North Carolina Central University,www.nccu.edu,Durham,NC
+100724,Alabama A&M University,www.aamu.edu,Huntsville,AL
+176372,Jackson State University,www.jsums.edu,Jackson,MS
+132602,Florida A&M University,www.famu.edu,Tallahassee,FL
+219602,Fisk University,www.fisk.edu,Nashville,TN
+175616,Hampton University,www.hamptonu.edu,Hampton,VA
+234827,Virginia State University,www.vsu.edu,Petersburg,VA
+218733,South Carolina State University,www.scsu.edu,Orangeburg,SC
+101587,Xavier University of Louisiana,www.xula.edu,New Orleans,LA
+219709,Tennessee State University,www.tnstate.edu,Nashville,TN
+177834,Lincoln University,www.lincoln.edu,Jefferson City,MO
+199218,Winston-Salem State University,www.wssu.edu,Winston-Salem,NC
+216597,Lincoln University of Pennsylvania,www.lincoln.edu,Lincoln University,PA
+133951,Stetson University,www.stetson.edu,DeLand,FL
+134097,Rollins College,www.rollins.edu,Winter Park,FL
+132657,Flagler College-St Augustine,www.flagler.edu,Saint Augustine,FL
+133553,New College of Florida,www.ncf.edu,Sarasota,FL
+155399,Washburn University,www.washburn.edu,Topeka,KS
+178402,Truman State University,www.truman.edu,Kirksville,MO
+236577,Washington and Lee University,www.wlu.edu,Lexington,VA
+232557,University of Richmond,www.richmond.edu,Richmond,VA
+232681,Virginia Military Institute,www.vmi.edu,Lexington,VA
+199193,Elon University,www.elon.edu,Elon,NC
+199847,Appalachian State University,www.appstate.edu,Boone,NC
+198385,East Carolina University,www.ecu.edu,Greenville,NC
+218964,Clemson University,www.clemson.edu,Clemson,SC
+218663,University of South Carolina-Columbia,www.sc.edu,Columbia,SC
+228246,Trinity University,www.trinity.edu,San Antonio,TX
+228431,Southwestern University,www.southwestern.edu,Georgetown,TX
+228875,University of Dallas,www.udallas.edu,Irving,TX
+227216,Austin College,www.austincollege.edu,Sherman,TX
+151801,DePauw University,www.depauw.edu,Greencastle,IN
+152530,Rose-Hulman Institute of Technology,www.rose-hulman.edu,Terre Haute,IN
+151306,Earlham College,www.earlham.edu,Richmond,IN
+151342,Wabash College,www.wabash.edu,Crawfordsville,IN
+150604,Butler University,www.butler.edu,Indianapolis,IN
+150136,Valparaiso University,www.valpo.edu,Valparaiso,IN
+171128,Kalamazoo College,www.kzoo.edu,Kalamazoo,MI
+170639,Hope College,www.hope.edu,Holland,MI
+170675,Albion College,www.albion.edu,Albion,MI
+170541,Calvin University,www.calvin.edu,Grand Rapids,MI
+174783,Gustavus Adolphus College,www.gustavus.edu,Saint Peter,MN
+169248,College of the Holy Cross,www.holycross.edu,Worcester,MA
+166513,Brandeis University,www.brandeis.edu,Waltham,MA
+167288,Clark University,www.clarku.edu,Worcester,MA
+167987,Boston College,www.bc.edu,Chestnut Hill,MA
+164924,Emory University,www.emory.edu,Atlanta,GA
+160038,Middlebury College,www.middlebury.edu,Middlebury,VT
+233897,Reed College,www.reed.edu,Portland,OR
+209825,Lewis & Clark College,www.lclark.edu,Portland,OR
+209612,Willamette University,www.willamette.edu,Salem,OR
+236230,Gonzaga University,www.gonzaga.edu,Spokane,WA
+234076,Seattle University,www.seattleu.edu,Seattle,WA
+236328,University of Puget Sound,www.pugetsound.edu,Tacoma,WA
+234155,Whitworth University,www.whitworth.edu,Spokane,WA
+236452,Walla Walla University,www.wallawalla.edu,College Place,WA
+110422,California State University-Long Beach,www.csulb.edu,Long Beach,CA
+110486,San Diego State University,www.sdsu.edu,San Diego,CA
+110510,San Jose State University,www.sjsu.edu,San Jose,CA
+110565,California Polytechnic State University-San Luis Obispo,www.calpoly.edu,San Luis Obispo,CA
+110592,California State Polytechnic University-Pomona,www.cpp.edu,Pomona,CA
+110529,San Francisco State University,www.sfsu.edu,San Francisco,CA
+110574,California State University-Fullerton,www.fullerton.edu,Fullerton,CA
+110495,California State University-Northridge,www.csun.edu,Northridge,CA
+110468,California State University-Fresno,www.fresnostate.edu,Fresno,CA
+110413,California State University-Sacramento,www.csus.edu,Sacramento,CA
+212577,Penn State University-Main Campus,www.psu.edu,University Park,PA
+196079,Syracuse University,www.syracuse.edu,Syracuse,NY
+186867,Seton Hall University,www.shu.edu,South Orange,NJ
+186399,Princeton Theological Seminary,www.ptsem.edu,Princeton,NJ
+186584,Rider University,www.rider.edu,Lawrenceville,NJ
+187134,Stevens Institute of Technology,www.stevens.edu,Hoboken,NJ
+187985,New Jersey Institute of Technology,www.njit.edu,Newark,NJ
+230038,George Mason University,www.gmu.edu,Fairfax,VA
+232265,James Madison University,www.jmu.edu,Harrisonburg,VA
+232423,Old Dominion University,www.odu.edu,Norfolk,VA
+199111,UNC Wilmington,www.uncw.edu,Wilmington,NC
+199139,UNC Charlotte,www.charlotte.edu,Charlotte,NC
+199157,UNC Greensboro,www.uncg.edu,Greensboro,NC
+199184,NC State University,www.ncsu.edu,Raleigh,NC
+134079,University of Central Florida,www.ucf.edu,Orlando,FL
+136172,University of South Florida,www.usf.edu,Tampa,FL
+132709,Florida International University,www.fiu.edu,Miami,FL
+133650,University of North Florida,www.unf.edu,Jacksonville,FL
+133881,Florida Atlantic University,www.fau.edu,Boca Raton,FL
+100706,University of Alabama at Birmingham,www.uab.edu,Birmingham,AL
+100830,University of South Alabama,www.southalabama.edu,Mobile,AL
+157289,University of Louisville,www.louisville.edu,Louisville,KY
+157447,Western Kentucky University,www.wku.edu,Bowling Green,KY
+157401,Murray State University,www.murraystate.edu,Murray,KY
+159009,Tulane University of Louisiana,www.tulane.edu,New Orleans,LA
+159647,University of New Orleans,www.uno.edu,New Orleans,LA
+159656,Loyola University New Orleans,www.loyno.edu,New Orleans,LA
+207500,University of Tulsa,www.utulsa.edu,Tulsa,OK
+207388,Oklahoma State University-Main Campus,www.okstate.edu,Stillwater,OK
+110699,University of California-Merced,www.ucmerced.edu,Merced,CA
+230782,Utah State University,www.usu.edu,Logan,UT
+230728,Westminster College,www.westminsteru.edu,Salt Lake City,UT
+182290,University of New Hampshire-Main Campus,www.unh.edu,Durham,NH
+183044,Saint Anselm College,www.anselm.edu,Manchester,NH
+160612,University of Vermont,www.uvm.edu,Burlington,VT
+217484,Roger Williams University,www.rwu.edu,Bristol,RI
+217235,Providence College,www.providence.edu,Providence,RI
+217165,Rhode Island School of Design,www.risd.edu,Providence,RI
+190600,Pratt Institute-Main,www.pratt.edu,Brooklyn,NY
+190637,School of Visual Arts,www.sva.edu,New York,NY
+188030,Fashion Institute of Technology,www.fitnyc.edu,New York,NY
+190549,Parsons School of Design at The New School,www.newschool.edu,New York,NY
+188429,Juilliard School,www.juilliard.edu,New York,NY
+190761,Manhattan School of Music,www.msmnyc.edu,New York,NY
+191630,Fordham University,www.fordham.edu,Bronx,NY
+190770,Pace University,www.pace.edu,New York,NY
+190491,Marist College,www.marist.edu,Poughkeepsie,NY
+195030,Ithaca College,www.ithaca.edu,Ithaca,NY
+194310,SUNY at Binghamton,www.binghamton.edu,Binghamton,NY
+196592,SUNY at Stony Brook,www.stonybrook.edu,Stony Brook,NY
+196060,SUNY at Albany,www.albany.edu,Albany,NY
+196121,SUNY College at Geneseo,www.geneseo.edu,Geneseo,NY
+196176,SUNY at Buffalo,www.buffalo.edu,Buffalo,NY
+196264,SUNY College at New Paltz,www.newpaltz.edu,New Paltz,NY
+164739,University of Maryland-Baltimore County,www.umbc.edu,Baltimore,MD
+163204,Towson University,www.towson.edu,Towson,MD
+162928,Salisbury University,www.salisbury.edu,Salisbury,MD
+163268,St Mary's College of Maryland,www.smcm.edu,St. Marys City,MD
+162007,Loyola University Maryland,www.loyola.edu,Baltimore,MD
+162584,Goucher College,www.goucher.edu,Baltimore,MD
+155681,Centre College,www.centre.edu,Danville,KY
+156620,Berea College,www.berea.edu,Berea,KY
+155520,Transylvania University,www.transy.edu,Lexington,KY
+102049,Spring Hill College,www.shc.edu,Mobile,AL
+101480,Birmingham-Southern College,www.bsc.edu,Birmingham,AL
+139199,Agnes Scott College,www.agnesscott.edu,Decatur,GA
+139931,Oglethorpe University,www.oglethorpe.edu,Atlanta,GA
+137032,Berry College,www.berry.edu,Mount Berry,GA
+221953,Rhodes College,www.rhodes.edu,Memphis,TN
+221740,Belmont University,www.belmont.edu,Nashville,TN
+221838,Lipscomb University,www.lipscomb.edu,Nashville,TN
+179566,Washington University in St Louis,www.wustl.edu,Saint Louis,MO
+178341,Saint Louis University,www.slu.edu,Saint Louis,MO
+178624,Westminster College,www.westminster-mo.edu,Fulton,MO
+155861,Hendrix College,www.hendrix.edu,Conway,AR
+107141,Hendrix College,www.hendrix.edu,Conway,AR
+107044,University of Arkansas at Little Rock,www.ualr.edu,Little Rock,AR
+176017,Millsaps College,www.millsaps.edu,Jackson,MS
+175272,University of Southern Mississippi,www.usm.edu,Hattiesburg,MS
+148654,Wheaton College,www.wheaton.edu,Wheaton,IL
+149772,North Central College,www.northcentralcollege.edu,Naperville,IL
+147341,Augustana College,www.augustana.edu,Rock Island,IL
+176965,College of the Ozarks,www.cofo.edu,Point Lookout,MO
+178059,Drury University,www.drury.edu,Springfield,MO
+230807,Weber State University,www.weber.edu,Ogden,UT
+126562,Colorado College,www.coloradocollege.edu,Colorado Springs,CO
+127060,Colorado School of Mines,www.mines.edu,Golden,CO
+126580,University of Denver,www.du.edu,Denver,CO
+126669,Fort Lewis College,www.fortlewis.edu,Durango,CO
+181394,Creighton University,www.creighton.edu,Omaha,NE
+181215,University of Nebraska at Omaha,www.unomaha.edu,Omaha,NE
+200332,Wittenberg University,www.wittenberg.edu,Springfield,OH
+200217,Miami University-Oxford,www.miamioh.edu,Oxford,OH
+201104,University of Toledo,www.utoledo.edu,Toledo,OH
+201441,Xavier University,www.xavier.edu,Cincinnati,OH
+240453,Marquette University,www.marquette.edu,Milwaukee,WI
+240329,University of Wisconsin-Milwaukee,www.uwm.edu,Milwaukee,WI
+240268,St Norbert College,www.snc.edu,De Pere,WI
+173902,Hamline University,www.hamline.edu,Saint Paul,MN
+174792,University of St Thomas,www.stthomas.edu,Saint Paul,MN
+173045,Augsburg University,www.augsburg.edu,Minneapolis,MN
+155547,Baker University,www.bakeru.edu,Baldwin City,KS
+155025,Bethany College,www.bethanylb.edu,Lindsborg,KS
+155061,University of Evansville,www.evansville.edu,Evansville,IN
+151102,Hanover College,www.hanover.edu,Hanover,IN
+150774,Franklin College,www.franklincollege.edu,Franklin,IN
+104586,Northern Arizona University,www.nau.edu,Flagstaff,AZ
+105330,Embry-Riddle Aeronautical University-Prescott,www.erau.edu,Prescott,AZ
+106412,University of New Mexico-Main Campus,www.unm.edu,Albuquerque,NM
+181002,University of New Mexico,www.unm.edu,Albuquerque,NM
+106458,New Mexico State University-Main Campus,www.nmsu.edu,Las Cruces,NM
+106704,Santa Fe University of Art and Design,www.santafeuniversity.edu,Santa Fe,NM
+230603,Southern Utah University,www.suu.edu,Cedar City,UT
+188641,College of New Jersey,www.tcnj.edu,Ewing,NJ
+186201,Drew University,www.drew.edu,Madison,NJ
+186432,Fairleigh Dickinson University-Metropolitan Campus,www.fdu.edu,Teaneck,NJ
+186876,Monmouth University,www.monmouth.edu,West Long Branch,NJ
+130183,Fairfield University,www.fairfield.edu,Fairfield,CT
+129020,Quinnipiac University,www.qu.edu,Hamden,CT
+129525,Sacred Heart University,www.sacredheart.edu,Fairfield,CT
+130624,University of Hartford,www.hartford.edu,West Hartford,CT
+129215,University of Connecticut,www.uconn.edu,Storrs,CT
+128780,Central Connecticut State University,www.ccsu.edu,New Britain,CT
+211291,Villanova University,www.villanova.edu,Villanova,PA
+211352,Saint Joseph's University,www.sju.edu,Philadelphia,PA
+211361,La Salle University,www.lasalle.edu,Philadelphia,PA
+215655,Gettysburg College,www.gettysburg.edu,Gettysburg,PA
+212674,Franklin and Marshall College,www.fandm.edu,Lancaster,PA
+213349,Dickinson College,www.dickinson.edu,Carlisle,PA
+216278,Lafayette College,www.lafayette.edu,Easton,PA
+216038,Muhlenberg College,www.muhlenberg.edu,Allentown,PA
+212984,Ursinus College,www.ursinus.edu,Collegeville,PA
+216764,Allegheny College,www.allegheny.edu,Meadville,PA
+212601,Juniata College,www.juniata.edu,Huntingdon,PA
+216694,Susquehanna University,www.susqu.edu,Selinsgrove,PA
+110097,Santa Monica College,www.smc.edu,Santa Monica,CA
+110246,Pasadena City College,www.pasadena.edu,Pasadena,CA
+119678,De Anza College,www.deanza.edu,Cupertino,CA
+122755,City College of San Francisco,www.ccsf.edu,San Francisco,CA
+190637,Borough of Manhattan Community College,www.bmcc.cuny.edu,New York,NY
+136215,Miami Dade College,www.mdc.edu,Miami,FL
+199236,Wake Technical Community College,www.waketech.edu,Raleigh,NC
+233541,Tacoma Community College,www.tacomacc.edu,Tacoma,WA
+228343,Austin Community College District,www.austincc.edu,Austin,TX
+144005,City Colleges of Chicago-Harold Washington College,www.ccc.edu,Chicago,IL
+171571,Babson College,www.babson.edu,Babson Park,MA
+168263,Bentley University,www.bentley.edu,Waltham,MA
+167792,Stonehill College,www.stonehill.edu,Easton,MA
+168005,Assumption University,www.assumption.edu,Worcester,MA
+167729,College of the Atlantic,www.coa.edu,Bar Harbor,ME
+213367,University of Scranton,www.scranton.edu,Scranton,PA
+142285,Wheaton College,www.wheaton.edu,Wheaton,IL
+225511,University of the Incarnate Word,www.uiw.edu,San Antonio,TX
+229780,Abilene Christian University,www.acu.edu,Abilene,TX
+230038,George Mason University,www.gmu.edu,Fairfax,VA
+139940,Agnes Scott College,www.agnesscott.edu,Decatur,GA
+218238,Wofford College,www.wofford.edu,Spartanburg,SC
+218742,Presbyterian College,www.presby.edu,Clinton,SC
+218229,Converse University,www.converse.edu,Spartanburg,SC
+222178,Sewanee-The University of the South,www.sewanee.edu,Sewanee,TN
+222831,University of Memphis,www.memphis.edu,Memphis,TN
+187444,Montclair State University,www.montclair.edu,Montclair,NJ
+195544,SUNY at Purchase College,www.purchase.edu,Purchase,NY
+233277,Evergreen State College,www.evergreen.edu,Olympia,WA
+174358,University of Minnesota Duluth,www.d.umn.edu,Duluth,MN
+160755,Norwich University,www.norwich.edu,Northfield,VT
+160977,Saint Michael's College,www.smcvt.edu,Colchester,VT
+200800,Ohio University-Main Campus,www.ohio.edu,Athens,OH
+201195,Kent State University at Kent,www.kent.edu,Kent,OH
+201584,Bowling Green State University-Main Campus,www.bgsu.edu,Bowling Green,OH
+200004,University of Akron Main Campus,www.uakron.edu,Akron,OH

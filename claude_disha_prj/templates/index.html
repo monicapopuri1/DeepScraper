@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Information Finder</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>College Information Finder</h1>
+            <p class="subtitle">Find contact information for Indian colleges</p>
+        </header>
+
+        <!-- Batch College Info Lookup -->
+        <section class="input-section" id="batch-section">
+            <div class="form-group">
+                <label for="batch-colleges">Enter College Names (one per line)</label>
+                <textarea id="batch-colleges" rows="5" placeholder="IIT Bombay | B.Tech Computer Science, MBA&#10;Delhi University&#10;BITS Pilani | M.Tech, PhD Physics"></textarea>
+            </div>
+            <button id="batch-lookup-btn" class="btn btn-primary">Find College Info</button>
+        </section>
+
+        <section id="batch-loading" class="hidden">
+            <div class="spinner"></div>
+            <p class="loading-text">Looking up college information... This may take a while.</p>
+        </section>
+
+        <section id="batch-results" class="hidden">
+            <h2 class="batch-results-title">College Information Results</h2>
+            <div id="batch-results-container"></div>
+        </section>
+
+        <div class="section-divider"><span>Course Finder</span></div>
+
+        <!-- Existing course finder section -->
+        <section class="input-section">
+            <div class="form-group">
+                <label for="college-name">Search by College Name</label>
+                <div class="url-row">
+                    <input type="text" id="college-name"
+                           placeholder="e.g., IIT Bombay, Delhi University, BITS Pilani" />
+                    <button id="search-college-btn" class="btn btn-secondary">Search</button>
+                </div>
+                <div id="college-search-status" class="status-msg hidden"></div>
+                <div id="college-suggestions" class="hidden"></div>
+            </div>
+            <div class="form-divider"><span>or enter URL directly</span></div>
+            <div class="form-group">
+                <label for="college-url">College Website URL</label>
+                <div class="url-row">
+                    <input type="text" id="college-url" placeholder="e.g., https://www.iitb.ac.in" />
+                    <button id="validate-btn" class="btn btn-secondary">Validate</button>
+                </div>
+                <div id="url-status" class="status-msg hidden"></div>
+            </div>
+
+            <div class="form-group">
+                <label>What would you like to do?</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="get_all" checked />
+                        <span>Get All Courses</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="verify" />
+                        <span>Verify Specific Courses</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="mode" value="college_info" />
+                        <span>Get College Information</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" id="courses-group" style="display:none;">
+                <label for="courses-input">Courses to Verify (one per line)</label>
+                <textarea id="courses-input" rows="5" placeholder="B.Tech Computer Science&#10;MBA&#10;M.Sc Physics"></textarea>
+            </div>
+
+            <button id="submit-btn" class="btn btn-primary" disabled>Find Courses</button>
+        </section>
+
+        <section id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p class="loading-text">Crawling website and extracting courses... This may take a minute.</p>
+        </section>
+
+        <section id="results" class="hidden">
+            <div class="results-header">
+                <h2 id="results-title"></h2>
+                <div class="results-meta">
+                    <span id="pages-crawled"></span>
+                    <span id="courses-found"></span>
+                </div>
+                <!-- <button id="save-all-btn" class="btn btn-primary">Save All as Markdown</button> -->
+            </div>
+            <div id="save-status" class="status-msg hidden"></div>
+            <div id="courses-container"></div>
+        </section>
+
+        <section id="error-section" class="hidden">
+            <div class="error-box">
+                <h3>Something went wrong</h3>
+                <p id="error-message"></p>
+            </div>
+        </section>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

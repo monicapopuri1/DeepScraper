@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Info Checker</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0f4f8;
+      color: #1a202c;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #2b6cb0;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #718096;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #2d3748;
+    }
+
+    /* Input table */
+    #input-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    #input-table th {
+      text-align: left;
+      background: #ebf8ff;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.85rem;
+      color: #2b6cb0;
+      border-bottom: 2px solid #bee3f8;
+    }
+
+    #input-table td {
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    #input-table input {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #input-table input:focus { border-color: #4299e1; }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #e53e3e;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0 0.4rem;
+    }
+
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    button {
+      padding: 0.55rem 1.2rem;
+      border: none;
+      border-radius: 7px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    button:active { transform: scale(0.97); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #btn-add    { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+    #btn-start  { background: #3182ce; color: #fff; }
+    #btn-reset  { background: #fff5f5; color: #c53030; border: 1px solid #fed7d7; }
+
+    /* Status bar */
+    #status-bar {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #2b6cb0;
+    }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 3px solid #bee3f8;
+      border-top-color: #3182ce;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #progress-text { flex: 1; }
+
+    /* Results table */
+    #results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    #results-table th {
+      background: #f7fafc;
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: #4a5568;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    #results-table td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    #results-table tr:last-child td { border-bottom: none; }
+    #results-table tr:hover td { background: #f7fafc; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .badge-done       { background: #c6f6d5; color: #22543d; }
+    .badge-failed     { background: #fed7d7; color: #742a2a; }
+    .badge-processing { background: #bee3f8; color: #2a4365; }
+
+    .found-yes { color: #276749; font-weight: 600; }
+    .found-no  { color: #9b2c2c; }
+
+    #empty-results {
+      text-align: center;
+      padding: 2rem;
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
+    a.url-link {
+      color: #3182ce;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    a.url-link:hover { text-decoration: underline; }
+
+    /* Feedback buttons */
+    .btn-fb {
+      padding: 0.2rem 0.45rem;
+      border: 1px solid;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-fb:hover { opacity: 0.75; }
+    .btn-fb-right   { background: #f0fff4; color: #276749; border-color: #9ae6b4; }
+    .btn-fb-partial { background: #fffaf0; color: #7b6122; border-color: #f6e05e; }
+    .btn-fb-wrong   { background: #fff5f5; color: #9b2c2c; border-color: #fc8181; }
+    .btn-fb-retry   { background: #ebf8ff; color: #2b6cb0; border-color: #90cdf4; }
+
+    /* Feedback panel (detail row) */
+    .feedback-panel {
+      background: #fffaf0;
+      border-top: 1px solid #fefcbf;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .feedback-panel label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #744210;
+    }
+    .feedback-panel textarea {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      resize: vertical;
+      font-family: inherit;
+    }
+    .feedback-panel .panel-btns {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Status badges for confirmed feedback */
+    .badge-confirmed { background: #c6f6d5; color: #22543d; }
+    .badge-partial   { background: #fefcbf; color: #7b6122; }
+    .badge-wrong-fb  { background: #fed7d7; color: #742a2a; }
+    .badge-cache     { background: #e9d8fd; color: #553c9a; }
+  </style>
+</head>
+<body>
+
+<h1>College Info Checker</h1>
+<p class="subtitle">Powered by LangGraph + GPT-4o &mdash; checks courses &amp; extracts contact info</p>
+
+<!-- Input Card -->
+<div class="card">
+  <h2>Colleges to Check</h2>
+  <table id="input-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>College Website URL</th>
+        <th>Courses to Verify (comma-separated)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="input-body">
+      <!-- rows added by JS -->
+    </tbody>
+  </table>
+
+  <div class="btn-row">
+    <button id="btn-add">+ Add Row</button>
+    <button id="btn-start">&#9654; Start Checking</button>
+    <button id="btn-reset">&#8635; Reset</button>
+  </div>
+</div>
+
+<!-- Disambiguation card — shown only when a course abbreviation is ambiguous -->
+<div id="disambig-card" class="card" style="display:none; border-left: 4px solid #d69e2e;">
+  <h2 style="color:#b7791f">&#x2753; Clarify Course Names</h2>
+  <p style="color:#744210; margin-bottom:1rem; font-size:0.9rem">
+    Some course names you entered could refer to multiple different courses in India.
+    Please select the correct one for each:
+  </p>
+  <div id="disambig-body"></div>
+  <div class="btn-row" style="margin-top:1rem">
+    <button id="btn-confirm-start" style="background:#d69e2e;color:#fff">&#10003; Confirm &amp; Start</button>
+    <button id="btn-cancel-disambig" style="background:#fff5f5;color:#c53030;border:1px solid #fed7d7">Cancel</button>
+  </div>
+</div>
+
+<!-- Status bar -->
+<div id="status-bar">
+  <div class="spinner"></div>
+  <div id="progress-text">Initialising…</div>
+</div>
+
+<!-- Results Card -->
+<div class="card">
+  <h2>Results</h2>
+  <div id="results-wrapper">
+    <div id="empty-results">No results yet. Add some colleges and click Start.</div>
+    <table id="results-table" style="display:none">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>College URL</th>
+          <th>Courses Found</th>
+          <th>Evidence</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Status</th>
+          <th>Feedback</th>
+        </tr>
+      </thead>
+      <tbody id="results-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // -----------------------------------------------------------------------
+  // Feedback state — persists across poll re-renders
+  // key: result.index (number) → { panel: 'open'|null, text: string }
+  // -----------------------------------------------------------------------
+  const _fbState = new Map();
+
+  // -----------------------------------------------------------------------
+  // Input table management
+  // -----------------------------------------------------------------------
+  let rowCount = 0;
+
+  function addRow(url = '', courses = '') {
+    rowCount++;
+    const tbody = document.getElementById('input-body');
+    const tr = document.createElement('tr');
+    tr.dataset.id = rowCount;
+    tr.innerHTML = `
+      <td>${rowCount}</td>
+      <td><input type="url" placeholder="https://college.edu" value="${url}" /></td>
+      <td><input type="text" placeholder="B.Tech, MBA, M.Sc" value="${courses}" /></td>
+      <td><button class="btn-remove" title="Remove row">&#x2715;</button></td>
+    `;
+    tr.querySelector('.btn-remove').addEventListener('click', () => tr.remove());
+    tbody.appendChild(tr);
+  }
+
+  // Start with 2 empty rows
+  addRow();
+  addRow();
+
+  document.getElementById('btn-add').addEventListener('click', () => addRow());
+
+  // -----------------------------------------------------------------------
+  // Collect entries from the input table
+  // -----------------------------------------------------------------------
+  function collectEntries() {
+    const rows = document.querySelectorAll('#input-body tr');
+    const entries = [];
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll('input');
+      const url = inputs[0].value.trim();
+      const courses = inputs[1].value.trim();
+      if (url) entries.push({ url, courses });
+    });
+    return entries;
+  }
+
+  // -----------------------------------------------------------------------
+  // Start — resolve courses first, then handle disambiguation or go straight
+  // -----------------------------------------------------------------------
+  document.getElementById('btn-start').addEventListener('click', async () => {
+    const entries = collectEntries();
+    if (!entries.length) { alert('Please add at least one college URL.'); return; }
+
+    setRunning(true);
+    setProgress('Resolving course names…');
+
+    try {
+      const res = await fetch('/api/resolve_courses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entries }),
+      });
+      const data = await res.json();
+
+      if (data.needs_clarification) {
+        // Pause: show disambiguation card, let user pick
+        setRunning(false);
+        showDisambiguation(data.entries, entries);
+      } else {
+        // No ambiguity — build enriched entries and start immediately
+        const enriched = buildEnrichedEntries(data.entries, entries, {});
+        await doStart(enriched);
+      }
+    } catch (e) {
+      alert('Network error during course resolution: ' + e.message);
+      setRunning(false);
+    }
+  });
+
+  // -----------------------------------------------------------------------
+  // Disambiguation card
+  // -----------------------------------------------------------------------
+  let _pendingResolvedEntries = null;
+  let _pendingRawEntries = null;
+
+  function showDisambiguation(resolvedEntries, rawEntries) {
+    _pendingResolvedEntries = resolvedEntries;
+    _pendingRawEntries = rawEntries;
+
+    const body = document.getElementById('disambig-body');
+    body.innerHTML = '';
+
+    resolvedEntries.forEach((entry, ei) => {
+      entry.resolutions.forEach((res, ri) => {
+        if (!res.ambiguous) return;
+        const div = document.createElement('div');
+        div.style.cssText = 'margin-bottom:1rem; padding:0.75rem; background:#fffff0; border-radius:8px; border:1px solid #ecc94b';
+        const label = document.createElement('p');
+        label.style.cssText = 'font-weight:600; margin-bottom:0.5rem; color:#744210';
+        label.textContent = `"${res.original}" (for ${entry.url || 'entry ' + (ei+1)}) could mean:`;
+        div.appendChild(label);
+
+        res.interpretations.forEach((interp, ii) => {
+          const radioId = `disambig-${ei}-${ri}-${ii}`;
+          const row = document.createElement('label');
+          row.style.cssText = 'display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem; cursor:pointer';
+          row.innerHTML = `
+            <input type="radio" name="disambig-${ei}-${ri}" value="${ii}" ${ii === 0 ? 'checked' : ''} id="${radioId}" />
+            <span><strong>${escHtml(interp.short || interp.name)}</strong> — ${escHtml(interp.name)}</span>
+          `;
+          div.appendChild(row);
+        });
+        body.appendChild(div);
+      });
+    });
+
+    document.getElementById('disambig-card').style.display = 'block';
+    document.getElementById('disambig-card').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('btn-cancel-disambig').addEventListener('click', () => {
+    document.getElementById('disambig-card').style.display = 'none';
+  });
+
+  document.getElementById('btn-confirm-start').addEventListener('click', async () => {
+    // Read selected interpretations
+    const selections = {};   // key: "ei-ri" → selected interpretation index
+    document.querySelectorAll('#disambig-body input[type=radio]:checked').forEach(radio => {
+      selections[radio.name] = parseInt(radio.value);
+    });
+
+    document.getElementById('disambig-card').style.display = 'none';
+    setRunning(true);
+
+    const enriched = buildEnrichedEntries(_pendingResolvedEntries, _pendingRawEntries, selections);
+    await doStart(enriched);
+  });
+
+  // -----------------------------------------------------------------------
+  // Build enriched entries (with course_synonyms) ready for /api/start
+  // -----------------------------------------------------------------------
+  function buildEnrichedEntries(resolvedEntries, rawEntries, selections) {
+    return resolvedEntries.map((rEntry, ei) => {
+      const raw = rawEntries[ei] || {};
+      const courseSynonyms = {};
+
+      rEntry.resolutions.forEach((res, ri) => {
+        let synonyms = [];
+        if (res.ambiguous) {
+          const selIdx = selections[`disambig-${ei}-${ri}`] ?? 0;
+          const chosen = res.interpretations[selIdx];
+          // Use the chosen interpretation's name as the resolved course
+          synonyms = [chosen.name, chosen.short].filter(Boolean);
+        } else {
+          synonyms = res.synonyms || [res.original];
+        }
+        courseSynonyms[res.original] = synonyms;
+      });
+
+      return { url: raw.url, courses: raw.courses, course_synonyms: courseSynonyms };
+    });
+  }
+
+  // -----------------------------------------------------------------------
+  // Call /api/start with enriched entries
+  // -----------------------------------------------------------------------
+  async function doStart(entries) {
+    try {
+      const res = await fetch('/api/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entries }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        alert(data.error);
+        setRunning(false);
+      } else {
+        startPolling();
+      }
+    } catch (e) {
+      alert('Network error: ' + e.message);
+      setRunning(false);
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // Reset
+  // -----------------------------------------------------------------------
+  document.getElementById('btn-reset').addEventListener('click', async () => {
+    if (!confirm('Clear all results and progress?')) return;
+    stopPolling();
+    await fetch('/api/reset', { method: 'POST' });
+    document.getElementById('results-body').innerHTML = '';
+    document.getElementById('results-table').style.display = 'none';
+    document.getElementById('empty-results').style.display = 'block';
+    setRunning(false);
+    updateStatusBar({ running: false });
+  });
+
+  // -----------------------------------------------------------------------
+  // Polling
+  // -----------------------------------------------------------------------
+  let pollInterval = null;
+
+  function startPolling() {
+    if (pollInterval) return;
+    pollInterval = setInterval(poll, 2000);
+    poll(); // immediate first call
+  }
+
+  function stopPolling() {
+    if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+  }
+
+  async function poll() {
+    try {
+      const [statusRes, resultsRes] = await Promise.all([
+        fetch('/api/status'),
+        fetch('/api/results'),
+      ]);
+      const status = await statusRes.json();
+      const results = await resultsRes.json();
+
+      updateStatusBar(status);
+      renderResults(results);
+
+      if (!status.running) {
+        stopPolling();
+        setRunning(false);
+      }
+    } catch (e) {
+      console.warn('Poll error:', e);
+    }
+  }
+
+  // -----------------------------------------------------------------------
+  // UI helpers
+  // -----------------------------------------------------------------------
+  function setRunning(running) {
+    document.getElementById('btn-start').disabled = running;
+    document.getElementById('btn-reset').disabled = running;
+    document.getElementById('status-bar').style.display = running ? 'flex' : 'none';
+  }
+
+  function setProgress(msg) {
+    document.getElementById('status-bar').style.display = 'flex';
+    document.getElementById('progress-text').textContent = msg;
+  }
+
+  function updateStatusBar(status) {
+    if (!status.running) {
+      document.getElementById('status-bar').style.display = 'none';
+      return;
+    }
+    document.getElementById('status-bar').style.display = 'flex';
+    const done = status.current_index || 0;
+    const total = status.total || '?';
+    const url = status.current_url || '…';
+    document.getElementById('progress-text').textContent =
+      `Processing ${done} / ${total} — ${url}`;
+  }
+
+  function renderResults(results) {
+    if (!results || !results.length) return;
+
+    // Preserve any unsaved textarea content before wiping the DOM
+    document.querySelectorAll('[id^="fb-text-"]').forEach(el => {
+      const idx = parseInt(el.id.replace('fb-text-', ''), 10);
+      const cur = _fbState.get(idx) || {};
+      _fbState.set(idx, { ...cur, text: el.value });
+    });
+
+    document.getElementById('empty-results').style.display = 'none';
+    document.getElementById('results-table').style.display = 'table';
+
+    const tbody = document.getElementById('results-body');
+    tbody.innerHTML = '';
+
+    results.forEach((r, i) => {
+      const idx = r.index ?? i;
+
+      const badgeClass = r.status === 'done' ? 'badge-done'
+        : r.status === 'failed' ? 'badge-failed'
+        : 'badge-processing';
+      const badgeLabel = r.status === 'done' ? 'Done'
+        : r.status === 'failed' ? 'Failed'
+        : 'Processing';
+
+      const foundHtml = r.status === 'failed'
+        ? `<span class="found-no">—</span>`
+        : r.course_found
+          ? `<span class="found-yes">&#10003; Yes</span>`
+          : `<span class="found-no">&#10007; No</span>`;
+
+      // Evidence cell
+      let evidenceHtml = '—';
+      if (r.playwright_evidence) {
+        const snippet = r.playwright_evidence.length > 160
+          ? escHtml(r.playwright_evidence.slice(0, 160)) + '…'
+          : escHtml(r.playwright_evidence);
+        const sourceLink = r.playwright_source_url
+          ? `<br><a class="url-link" href="${escHtml(r.playwright_source_url)}" target="_blank" rel="noopener" style="font-size:0.78rem">source</a>`
+          : '';
+        evidenceHtml = `<span title="${escHtml(r.playwright_evidence)}" style="cursor:help">${snippet}</span>${sourceLink}
+          <br><span class="badge" style="background:#e9d8fd;color:#553c9a;margin-top:3px">via Playwright</span>`;
+      }
+
+      // Feedback cell
+      const fbHtml = buildFeedbackCell(r, idx);
+
+      const tr = document.createElement('tr');
+      tr.id = `result-row-${idx}`;
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td><a class="url-link" href="${escHtml(r.url)}" target="_blank" rel="noopener">${escHtml(r.url)}</a></td>
+        <td>${foundHtml}${r.courses_requested && r.courses_requested.length ? '<br><small style="color:#718096">' + escHtml(r.courses_requested.join(', ')) + '</small>' : ''}</td>
+        <td style="max-width:260px">${evidenceHtml}</td>
+        <td>${escHtml(r.contact || '—')}</td>
+        <td>${r.email ? `<a href="mailto:${escHtml(r.email)}">${escHtml(r.email)}</a>` : '—'}</td>
+        <td>${escHtml(r.address || '—')}</td>
+        <td><span class="badge ${badgeClass}">${badgeLabel}</span>${r.error ? '<br><small style="color:#e53e3e">' + escHtml(r.error) + '</small>' : ''}</td>
+        <td style="white-space:nowrap">${fbHtml}</td>
+      `;
+      tbody.appendChild(tr);
+
+      // Feedback panel row (shown when user clicks ✗ Wrong)
+      const fState = _fbState.get(idx);
+      if (fState && fState.panel === 'open') {
+        const savedText = escHtml(fState.text || '');
+        const panelRow = document.createElement('tr');
+        panelRow.id = `fb-panel-${idx}`;
+        panelRow.innerHTML = `
+          <td colspan="9" style="padding:0; border-bottom:2px solid #fefcbf">
+            <div class="feedback-panel">
+              <label>What is incorrect? (helps us improve &amp; retry smarter)</label>
+              <textarea id="fb-text-${idx}" rows="2" placeholder="e.g. The course IS offered — page says B.Tech AI on the admissions tab">${savedText}</textarea>
+              <div class="panel-btns">
+                <button class="btn-fb btn-fb-retry" onclick="submitRetry(${idx})">&#x21BA; Retry with correction</button>
+                <button class="btn-fb btn-fb-wrong" onclick="submitFeedbackOnly(${idx})">Save feedback only</button>
+                <button class="btn-fb" style="background:#f7fafc;color:#4a5568;border-color:#e2e8f0" onclick="closeFbPanel(${idx})">Cancel</button>
+              </div>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(panelRow);
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------------
+  // Build the content of the Feedback cell for one result row
+  // -----------------------------------------------------------------------
+  function buildFeedbackCell(r, idx) {
+    if (r.status !== 'done') return '<span style="color:#a0aec0">—</span>';
+
+    // From cache — already confirmed, no further feedback needed
+    if (r.from_cache) {
+      return '<span class="badge badge-cache">&#128203; Cached</span>';
+    }
+
+    // Feedback already recorded on server
+    const fb = r.feedback;
+    if (fb === 'right') {
+      return '<span class="badge badge-confirmed">&#10003; Confirmed</span>';
+    }
+    if (fb === 'partially_right') {
+      return '<span class="badge badge-partial">&#8776; Partially right</span>';
+    }
+    if (fb === 'wrong') {
+      return `<span class="badge badge-wrong-fb">&#10007; Wrong</span>
+        <br><button class="btn-fb btn-fb-retry" style="margin-top:4px" onclick="openFbPanel(${idx})">Retry</button>`;
+    }
+
+    // No feedback yet — show action buttons
+    return `
+      <button class="btn-fb btn-fb-right"   onclick="submitRight(${idx})">&#10003; Right</button>
+      <button class="btn-fb btn-fb-partial" onclick="submitPartial(${idx})" style="margin:0 3px">&#8776; Partial</button>
+      <button class="btn-fb btn-fb-wrong"   onclick="openFbPanel(${idx})">&#10007; Wrong</button>
+    `;
+  }
+
+  // -----------------------------------------------------------------------
+  // Feedback actions
+  // -----------------------------------------------------------------------
+  async function submitRight(idx) {
+    await _postFeedback(idx, 'right', '');
+  }
+
+  async function submitPartial(idx) {
+    await _postFeedback(idx, 'partially_right', '');
+  }
+
+  function openFbPanel(idx) {
+    const cur = _fbState.get(idx) || {};
+    _fbState.set(idx, { ...cur, panel: 'open' });
+    poll();
+  }
+
+  function closeFbPanel(idx) {
+    const cur = _fbState.get(idx) || {};
+    _fbState.set(idx, { ...cur, panel: null });
+    poll();
+  }
+
+  async function submitFeedbackOnly(idx) {
+    const notes = (document.getElementById(`fb-text-${idx}`) || {}).value || '';
+    _fbState.set(idx, { panel: null, text: '' });
+    await _postFeedback(idx, 'wrong', notes);
+  }
+
+  async function submitRetry(idx) {
+    const notes = (document.getElementById(`fb-text-${idx}`) || {}).value || '';
+    // Save feedback first
+    await _postFeedback(idx, 'wrong', notes);
+    // Clear local state for this index so fresh buttons show after retry
+    _fbState.delete(idx);
+    // Trigger retry
+    try {
+      const res = await fetch('/api/retry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ index: idx, notes }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        alert('Retry failed: ' + data.error);
+      } else if (data.from_cache) {
+        // Answer was already in the verified cache — no crawl needed
+        poll();
+      } else {
+        setRunning(true);
+        startPolling();
+      }
+    } catch (e) {
+      alert('Network error during retry: ' + e.message);
+    }
+  }
+
+  async function _postFeedback(idx, feedback, notes) {
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ index: idx, feedback, notes }),
+      });
+      poll();
+    } catch (e) {
+      console.warn('Feedback post error:', e);
+    }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // On page load, check if a run is already in progress (e.g. after page refresh)
+  (async () => {
+    try {
+      const res = await fetch('/api/status');
+      const status = await res.json();
+      if (status.running) {
+        setRunning(true);
+        startPolling();
+      } else {
+        // Show any existing results
+        const rRes = await fetch('/api/results');
+        const results = await rRes.json();
+        renderResults(results);
+      }
+    } catch (e) { /* server not ready */ }
+  })();
+</script>
+</body>
+</html>

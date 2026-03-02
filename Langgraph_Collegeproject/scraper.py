@@ -16,7 +16,10 @@ HEADERS = {
 _COURSE_KEYWORDS = re.compile(
     r"course|programme|program|academic|department|faculty|"
     r"degree|curriculum|study|studies|admission|school|ug|pg|"
-    r"undergrad|postgrad|master|bachelor|doctoral|phd",
+    r"undergrad|postgrad|master|bachelor|doctoral|phd|"
+    r"nursing|medical|medicine|pharmacy|dental|health|paramedical|"
+    r"physiotherapy|occupational|allied|science|arts|commerce|law|"
+    r"engineering|technology|management|education|architecture",
     re.IGNORECASE,
 )
 

@@ -42,7 +42,9 @@ RATE_LIMIT_SECONDS = 1.0
 
 # URL fragments that signal course/programme relevance — get higher BFS priority
 PRIORITY_KEYWORDS = re.compile(
-    r"programme|course|engineering|mtech|m\.tech|pg|postgraduate|school|institute|department|faculty|admission",
+    r"programme|course|engineering|mtech|m\.tech|pg|postgraduate|school|institute|department|faculty|admission|"
+    r"nursing|medical|medicine|pharmacy|dental|health|paramedical|physiotherapy|occupational|allied|"
+    r"science|arts|commerce|law|management|education|architecture|technology",
     re.IGNORECASE,
 )
 
@@ -324,12 +326,35 @@ class PlaywrightCrawler:
             # Step 2 — filter: keep only programme-relevant URLs, drop bulk noise
             # Also allow subdomains of the root domain (e.g. set.jainuniversity.ac.in)
             root_domain = self.allowed_domains[0]
-            filtered = [
-                u for u in sitemap_urls
-                if PRIORITY_KEYWORDS.search(u)
-                and not SKIP_BULK.search(u)
-                and root_domain in urlparse(u).netloc
-            ]
+
+            # Build a course-specific word pattern from the searcher's variants
+            # so URLs like /nursing/ are kept when searching for B.Sc Nursing,
+            # /pharmacy/ for B.Pharm, etc. — works for any domain, not just medical.
+            course_url_pattern = None
+            if self.searcher:
+                course_words = set()
+                for v in self.searcher.variants:
+                    for token in re.split(r"[\s,./()\-]+", v.lower()):
+                        clean = token.strip(".")
+                        if len(clean) > 3:
+                            course_words.add(re.escape(clean))
+                if course_words:
+                    course_url_pattern = re.compile(
+                        "|".join(sorted(course_words, key=len, reverse=True)),
+                        re.IGNORECASE,
+                    )
+
+            def _relevant(u):
+                if SKIP_BULK.search(u):
+                    return False
+                if root_domain not in urlparse(u).netloc:
+                    return False
+                return bool(
+                    PRIORITY_KEYWORDS.search(u)
+                    or (course_url_pattern and course_url_pattern.search(u))
+                )
+
+            filtered = [u for u in sitemap_urls if _relevant(u)]
             # Remove already-visited
             filtered = [u for u in filtered if not self.db.url_exists(u)]
             # Deduplicate

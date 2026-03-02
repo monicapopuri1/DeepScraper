@@ -46,6 +46,14 @@ PRIORITY_KEYWORDS = re.compile(
     re.IGNORECASE,
 )
 
+# URL fragments to skip — pages that are irrelevant to course listings
+# (doctor/staff directories, news, events, search results, galleries, etc.)
+SKIP_BULK = re.compile(
+    r"/faculty/|/news/|/event/|/gallery/|/blog|/alumni/"
+    r"|/doctor|/physician|/staff|/search|/find-a|/directory|/profile/",
+    re.IGNORECASE,
+)
+
 # Extensions to skip
 SKIP_EXTENSIONS = re.compile(
     r"\.(pdf|jpg|jpeg|png|gif|svg|ico|css|js|zip|doc|docx|xls|xlsx|ppt|pptx|mp4|mp3|avi|mov)$",
@@ -176,13 +184,20 @@ class CrawlerDB:
         return self.conn.execute("SELECT COUNT(*) FROM pages").fetchone()[0]
 
     def search_variant(self, variant: str):
-        """Return list of (url, text_content) rows matching variant (case-insensitive LIKE)."""
+        """
+        Return (url, text_content) rows where variant appears as a complete phrase,
+        not embedded inside another word (e.g. 'MBA' must not match 'Marimba').
+        SQLite LIKE is used as a fast pre-filter; Python regex with word-boundary
+        lookarounds is then applied to remove false positives.
+        """
         like_pattern = f"%{variant}%"
-        rows = self.conn.execute(
+        candidates = self.conn.execute(
             "SELECT url, text_content FROM pages WHERE text_content LIKE ? COLLATE NOCASE",
             (like_pattern,),
         ).fetchall()
-        return rows
+        # Post-filter: require variant to be surrounded by non-word characters
+        pattern = re.compile(r'(?<!\w)' + re.escape(variant) + r'(?!\w)', re.IGNORECASE)
+        return [(url, text) for url, text in candidates if pattern.search(text)]
 
     def close(self):
         self.conn.close()
@@ -285,8 +300,6 @@ class PlaywrightCrawler:
         import time
         t0 = time.time()
         print(f"[FAST] Sitemap-only mode — skipping BFS crawl.")
-
-        SKIP_BULK = re.compile(r"/faculty/|/news/|/event/|/gallery/|/blog|/alumni/", re.IGNORECASE)
 
         async with async_playwright() as pw:
             browser = await pw.chromium.launch(headless=True)
@@ -400,7 +413,6 @@ class PlaywrightCrawler:
             # Add sitemap URLs filtered by domain and keyword (depth=1)
             # Only add keyword-matching sitemap URLs — skip bulk non-relevant pages
             # (e.g. hundreds of /faculty/name-* pages that drown out course pages)
-            SKIP_BULK = re.compile(r"/faculty/|/news/|/event/|/gallery/|/blog/|/alumni/", re.IGNORECASE)
             programme_sitemap = [
                 u for u in sitemap_urls
                 if PRIORITY_KEYWORDS.search(u) and not SKIP_BULK.search(u)
@@ -524,14 +536,27 @@ class CourseSearcher:
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         self.client = anthropic.Anthropic(api_key=api_key) if api_key else None
 
+    @staticmethod
+    def _whole_word_match(text: str, variant: str) -> bool:
+        """
+        Return True only if variant appears as a complete phrase in text —
+        i.e. not embedded inside another word.
+        e.g. 'MBA' matches ' MBA,' and '(MBA)' but NOT 'Marimba' or 'DMBA'.
+        Uses negative lookbehind/lookahead so punctuation variants like
+        'M.B.A.' also work correctly.
+        """
+        pattern = re.compile(r'(?<!\w)' + re.escape(variant) + r'(?!\w)', re.IGNORECASE)
+        return bool(pattern.search(text))
+
     def check_page(self, url: str, text: str) -> dict | None:
         """
         Check a single page's text for any variant (in-memory, no DB query).
+        Requires whole-word match — variant must not be part of another word.
         If a variant is found, immediately run LLM verification.
         Returns a result dict if matched, None if no match.
         """
         for variant in self.variants:
-            if variant.lower() in text.lower():
+            if self._whole_word_match(text, variant):
                 print(f"[EARLY] Match found on: {url} (variant: \"{variant}\")")
                 return self._llm_verify(url, text, variant)
         return None
@@ -684,12 +709,13 @@ NOTES: <any clarifying notes, e.g. a similar but different course was found inst
 
         except Exception as exc:
             print(f"[LLM] Error calling Claude: {exc}")
+            # LLM failed — do NOT claim the course is found; a text match alone is not enough
             return {
-                "found": True,
-                "confidence": 40,
-                "evidence": f'Text match found for variant: "{matched_variant}" (LLM call failed: {exc})',
+                "found": False,
+                "confidence": 0,
+                "evidence": f'Text match for "{matched_variant}" but LLM verification failed: {exc}',
                 "source_url": url,
-                "llm_verdict": "POSSIBLY_FOUND",
+                "llm_verdict": "NOT_FOUND",
             }
 
 

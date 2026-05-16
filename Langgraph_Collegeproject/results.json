@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "url": "https://www.stjohns.in/",
+    "courses_requested": [
+      "B.Sc (N)"
+    ],
+    "course_found": false,
+    "playwright_evidence": "",
+    "playwright_source_url": "",
+    "contact": "+91 080 22065000 / 5001",
+    "email": "sjmch.infodesk@stjohns.in",
+    "address": "St. John\u2019s National Academy of Health Sciences, Sarjapur Road, Bangalore - 560034 , Karnataka, India",
+    "status": "done",
+    "error": ""
+  },
+  {
+    "index": 1,
+    "url": "https://www.stjohns.in/",
+    "courses_requested": [
+      "MBA"
+    ],
+    "course_found": true,
+    "playwright_evidence": "Text match found for variant: \"MBA\" (LLM call failed: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CYe35vkc95bigPYxxHXv8'})",
+    "playwright_source_url": "https://www.stjohns.in/Search_Doctor.php",
+    "contact": "+91 080 22065000 / 5001",
+    "email": "sjmch.infodesk@stjohns.in",
+    "address": "St. John\u2019s National Academy of Health Sciences, Sarjapur Road, Bangalore - 560034 , Karnataka, India",
+    "status": "done",
+    "error": ""
+  }
+]

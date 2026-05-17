@@ -1,0 +1,16 @@
+# Runtime data
+results.json
+progress.json
+*.log
+*.db
+
+# Scratch / notes
+College.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/

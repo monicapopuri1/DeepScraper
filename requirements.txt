@@ -1,0 +1,9 @@
+flask
+langgraph
+langchain-openai
+anthropic
+requests
+beautifulsoup4
+lxml
+python-dotenv
+playwright

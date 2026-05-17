@@ -4,3 +4,11 @@ node_modules
 GradeBuddy/
 CollegeCourses/
 claude_disha_prj/
+
+# Langgraph_Collegeproject runtime files
+Langgraph_Collegeproject/*.db
+Langgraph_Collegeproject/venv/
+Langgraph_Collegeproject/__pycache__/
+Langgraph_Collegeproject/pipeline.log
+Langgraph_Collegeproject/server.log
+Langgraph_Collegeproject/progress.json

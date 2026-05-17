@@ -3,10 +3,11 @@ import json
 import logging
 import os
 import re
+import threading
 import time
 from typing import TypedDict
 
-import httpx
+import anthropic
 from dotenv import load_dotenv
 from langgraph.graph import StateGraph, END
 
@@ -14,8 +15,12 @@ from scraper import fetch_page_text, fetch_page_and_links
 
 load_dotenv()
 
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3")   # llama3 8B — much better than llama3.2 2B
-OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-4-5-20251001")
+
+_claude_client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+# Lock for thread-safe writes to results.json when running in parallel
+_results_file_lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
 # Logging setup — one logger for the whole pipeline
@@ -38,21 +43,15 @@ log.propagate = True  # also still goes to stdout/server.log
 
 
 def _ask_llm(prompt: str) -> str:
-    """Call Ollama's local LLM via its REST API."""
-    log.info("  [LLM] sending prompt (%d chars) to %s", len(prompt), OLLAMA_MODEL)
+    """Call Claude API for LLM inference."""
+    log.info("  [LLM] sending prompt (%d chars) to %s", len(prompt), CLAUDE_MODEL)
     t0 = time.time()
-    response = httpx.post(
-        f"{OLLAMA_URL}/api/generate",
-        json={
-            "model": OLLAMA_MODEL,
-            "prompt": prompt,
-            "stream": False,
-            "options": {"temperature": 0},  # deterministic — same prompt always gives same answer
-        },
-        timeout=180,
+    message = _claude_client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=1024,
+        messages=[{"role": "user", "content": prompt}],
     )
-    response.raise_for_status()
-    result = response.json()["response"].strip()
+    result = message.content[0].text.strip()
     log.info("  [LLM] response in %.1fs → %s", time.time() - t0, result[:120])
     return result
 
@@ -544,15 +543,18 @@ def save_result(state: CollegeState) -> dict:
         "error": state.get("error", ""),
     }
 
-    # Replace if already exists (resume scenario or retry scenario)
-    results = [r for r in results if r.get("index") != record_index]
-    results.append(record)
-    results.sort(key=lambda r: r["index"])
-
     log.info("  saved record: url=%s  course_found=%s  status=%s",
              record["url"], record["course_found"], record["status"])
-    _save_json(RESULTS_FILE, results)
-    _save_json(PROGRESS_FILE, {"current_index": idx + 1, "total": len(state["entries"])})
+
+    # Thread-safe write: read latest from disk, merge, write back
+    with _results_file_lock:
+        on_disk = _load_json(RESULTS_FILE, [])
+        on_disk = [r for r in on_disk if r.get("index") != record_index]
+        on_disk.append(record)
+        on_disk.sort(key=lambda r: r["index"])
+        _save_json(RESULTS_FILE, on_disk)
+
+    results = on_disk
 
     return {
         "results": results,

@@ -1,6 +1,7 @@
 import json
 import os
 import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from flask import Flask, jsonify, render_template, request
 
@@ -121,25 +122,43 @@ def api_start():
             _status.update({"running": False, "current_url": "", "current_index": 0, "total": 0})
         return jsonify({"ok": True, "total": 0, "from_cache": cached_count})
 
+    max_workers = int(os.getenv("MAX_WORKERS", "3"))
+    total = len(uncached_entries)
+
     with _lock:
         _status["running"] = True
         _status["current_url"] = ""
         _status["current_index"] = 0
-        _status["total"] = len(uncached_entries)
+        _status["total"] = total
         _status.pop("error", None)
+
+    def process_one(entry):
+        """Run the full pipeline for a single college entry."""
+        local_status = {}
+        run_graph([entry], local_status)
+        with _lock:
+            _status["current_index"] += 1
+            _status["current_url"] = entry.get("url", "")
 
     def worker():
         try:
-            run_graph(uncached_entries, _status)
-        except Exception as e:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = {executor.submit(process_one, entry): entry for entry in uncached_entries}
+                for future in as_completed(futures):
+                    try:
+                        future.result()
+                    except Exception as e:
+                        entry = futures[future]
+                        with _lock:
+                            _status["error"] = f"{entry.get('url')}: {e}"
+        finally:
             with _lock:
                 _status["running"] = False
-                _status["error"] = str(e)
 
     t = threading.Thread(target=worker, daemon=True)
     t.start()
 
-    return jsonify({"ok": True, "total": len(uncached_entries), "from_cache": cached_count})
+    return jsonify({"ok": True, "total": total, "from_cache": cached_count, "workers": max_workers})
 
 
 @app.route("/api/results")

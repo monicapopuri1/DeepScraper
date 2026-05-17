@@ -1,9 +1,13 @@
 import re
+import warnings
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urljoin, urlparse
 
 import requests
+import urllib3
 from bs4 import BeautifulSoup
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 HEADERS = {
     "User-Agent": (
@@ -33,7 +37,7 @@ _CONTACT_KEYWORDS = re.compile(
 def _fetch_soup(url: str, timeout: int = 10):
     """Return (BeautifulSoup, response_url, error_string)."""
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=timeout)
+        resp = requests.get(url, headers=HEADERS, timeout=timeout, verify=False)
         resp.raise_for_status()
         return BeautifulSoup(resp.text, "lxml"), resp.url, None
     except requests.exceptions.Timeout:
@@ -117,7 +121,7 @@ _CONTACT_FALLBACK_PATHS = [
 def _probe_url(url: str, timeout: int = 4) -> bool:
     """Return True if the URL responds with a non-4xx/5xx status."""
     try:
-        r = requests.head(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
+        r = requests.head(url, headers=HEADERS, timeout=timeout, allow_redirects=True, verify=False)
         return r.status_code < 400
     except Exception:
         return False
